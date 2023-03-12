@@ -1,6 +1,10 @@
-use zero2prod::main;
+#[tokio::test]
+async fn health_check_works() {
+    spawn_app();
+}
 
-#[test]
-fn dummy_test() {
-    main()
+fn spawn_app() {
+    let server = zero2prod::run().expect("Failed to bind address");
+
+    let _ = tokio::spawn(server);
 }
